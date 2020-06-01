@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
-# from tinymce.models import HTMLField
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -16,3 +16,8 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
+
+    @classmethod
+    def search_by_title(cls,search_term):
+        gram = cls.objects.filter(title__icontains=search_term)
+        return gram
