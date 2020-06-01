@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# @login_required(login_url='/accounts/register/')
+@login_required(login_url='/accounts/register/')
 def new_post(request):
     date = dt.date.today()
     posts = Post.objects.all()
@@ -26,7 +26,7 @@ def new_post(request):
     else:
         form = PostForm()
     return render(request, 'all-insta/post.html', {"date": date,'posts': posts,"postForm":form})
-
+##view function that will handle the logic for displaying the search results
 def search_results(request):
     if 'post' in request.GET and request.GET["post"]:
         search_term = request.GET.get("post")
@@ -38,6 +38,31 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-insta/search.html',{"message":message})
+
+@login_required(login_url='/accounts/login/')
+def post(request):
+
+    try:
+        post = Post.objects.get(id = post_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"all-insta/single_post.html", {"post":post})
+    
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile = current_user
+            post.save()
+        return redirect('newpost')
+
+    else:
+        form = PostForm()
+    return render(request, 'profile.html', {"form": form})
 
 
 
