@@ -4,10 +4,10 @@ from django.test import TestCase
 
 class PostTestClass(TestCase):
     def setUp(self):
-        self.maggie=Profile(title='sirmwas',Bio='testing')
-        self.maggie.save_editor()
+        self.sirmwas=Profile(title='sirmwas',Bio='testing')
+        self.sirmwas.save_editor()
 
-        self.new_post=Post(title='jadiel',post='testing',profile = self.maggie)
+        self.new_post=Post(title='jadiel',post='testing',profile = self.sirmwas)
         self.new_post.save()
 
     def tearDown(self):
