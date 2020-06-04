@@ -21,6 +21,7 @@ class Post(models.Model):
     profile = models.ForeignKey(User,on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
     post_image = models.ImageField(upload_to = 'posts/', blank=True)
+    
 ##method that will query the database and fetch our results.
 
     @classmethod
