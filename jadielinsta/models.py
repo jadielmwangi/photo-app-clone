@@ -22,7 +22,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     post_image = models.ImageField(upload_to = 'posts/', blank=True)
     
-##method that will query the database and fetch our results.
+## method that will query the database and fetch our results.
 
     @classmethod
     def search_by_title(cls,search_term):
