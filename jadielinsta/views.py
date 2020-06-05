@@ -26,7 +26,8 @@ def new_post(request):
     else:
         form = PostForm()
     return render(request, 'all-insta/post.html', {"date": date,'posts': posts,"postForm":form})
-##view function that will handle the logic for displaying the search results
+
+## view function that will handle the logic for displaying the search results
 def search_results(request):
     if 'post' in request.GET and request.GET["post"]:
         search_term = request.GET.get("post")
